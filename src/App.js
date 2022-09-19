@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import Landing from './Components/Landing.js';
+import useStyles from "./Styles/styles";
+import { createTheme, ThemeProvider } from '@material-ui/core';
 
+import './App.css';
+import Home from './Components/Home.js';
 function App() {
+  const theme = createTheme();
+    const classes = useStyles(); 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+     <div className={classes.app}>
+     <Routes>
+      <Route path="/" element={<Landing/>}/>
+      <Route path="/home" element={<Home/>}/>
+      </Routes>
+    </div> 
+   
   );
 }
 

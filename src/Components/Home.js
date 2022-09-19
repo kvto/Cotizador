@@ -2,30 +2,19 @@ import React, { useEffect, useState } from 'react'
 import useStyles from "../Styles/styles";
 import { createTheme, ThemeProvider  } from '@mui/material/styles';
 import { Grid } from '@material-ui/core';
-import {getUsers} from '../Actions/action';
 import axios from "axios";
-import { useDispatch, useSelector } from 'react-redux';
 
 
-const validate = function (input) {
-  let error = {}
-  
-  if (input.name=="default") error.name = "🚫 Debe eligir una opcion🚫"
-  if (input.car==="default") error.name = "🚫 Debe eligir una opcion🚫"
-  if (input.plan==="default") error.name = "🚫 Debe eligir una opcion🚫"
-  return error
-}
+
 
 export default function Home() {
-  const [errors, setErrors] = useState({})
-
   const [input, setInput] = useState({
         name: [],
         car: [],
         plan: []
     })
   const [characters, setCharacters] = useState([]);
-  const [info, setInfo] = useState({});
+  const [info, setInfo] = useState(false);
   const url = "https://jsonplaceholder.typicode.com/users";
 
   const fetchCharacters = (url) => {
@@ -54,22 +43,16 @@ export default function Home() {
 
 function handleSubmit(e) {
   e.preventDefault()
-  setErrors(validate(input))
-  const errorSaver = validate(input)
-  if (Object.values(errorSaver).length !== 0) {
-      alert('Error a la hora de rellenar los datos, verifique 🛑');        
-  }
-  else {
-      alert('La raza fue agregada correctamente!✅');
+  
+  alert('La raza fue agregada correctamente!✅');
       setInput({
         name: [],
         car: [],
         plan: []
       });
-  }
+setInfo(true)
 }
 
-  const theme = createTheme();
     const classes = useStyles(); 
   return (
     <div>
@@ -115,14 +98,40 @@ function handleSubmit(e) {
         <option value="limi">Protección limitada 📉</option>
         <option value="robo">Solo robo 📉</option>
       </select>
-
       <button
-                        className="createDogButton"
+                        className={classes.buttomHome}
                         type="submit"
                         
                         disabled={input.name.length <= 2 ? true : false}
                        onClick={(e) => handleSubmit(e)}
-                    >Crear Raza‼️‼️</button>
+                    >Validar‼️</button>
+
+                    {
+                      !info ? (
+                      <div className={classes.form}>
+                      <label>Nombre del cliente 🏷️: </label>
+                      <input className={classes.inputs}
+                          type="text"
+                          name="name"
+                          disabled
+                          placeholder="Nombre de la raza"/>
+
+                      <label>Correo electronico del cliente 🏷️: </label>
+                      <input className={classes.inputs}
+                          type="text"
+                          name="name"
+                          disabled
+                          placeholder="Nombre de la raza"/>
+                  </div>) : (
+                  <div className="breed">
+                      <label>Apellido de la raza 🏷️: </label>
+                      <input className="inputs"
+                          type="text"
+                          name="name"
+                          placeholder="Nombre de la raza"/>
+                          </div>
+                          )
+                    }
       </Grid>
     </div>
   )

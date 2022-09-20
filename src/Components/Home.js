@@ -10,8 +10,7 @@ import axios from "axios";
 export default function Home() {
   const [input, setInput] = useState({
         name: [],
-        car: [],
-        plan: []
+        email: []
     })
   const [characters, setCharacters] = useState([]);
   const [info, setInfo] = useState(false);
@@ -40,20 +39,16 @@ export default function Home() {
     })
 }
 
-
 function handleSubmit(e) {
   e.preventDefault()
-  
   alert('La raza fue agregada correctamente!✅');
-      setInput({
-        name: [],
-        car: [],
-        plan: []
-      });
 setInfo(true)
+console.log(input.email)
 }
 
-    const classes = useStyles(); 
+
+
+  const classes = useStyles(); 
   return (
     <div>
       Cotizador Vehiculos
@@ -103,33 +98,33 @@ setInfo(true)
                         type="submit"
                         
                         disabled={input.name.length <= 2 ? true : false}
-                       onClick={(e) => handleSubmit(e)}
+                       onClick={(e) => this.handleSubmit(e)}
                     >Validar‼️</button>
 
                     {
                       !info ? (
                       <div className={classes.form}>
-                      <label>Nombre del cliente 🏷️: </label>
                       <input className={classes.inputs}
                           type="text"
-                          name="name"
                           disabled
-                          placeholder="Nombre de la raza"/>
+                          placeholder="Nombre del Cliente"/>
 
-                      <label>Correo electronico del cliente 🏷️: </label>
                       <input className={classes.inputs}
                           type="text"
-                          name="name"
                           disabled
-                          placeholder="Nombre de la raza"/>
+                          placeholder="Email del Cliente"/>
                   </div>) : (
-                  <div className="breed">
-                      <label>Apellido de la raza 🏷️: </label>
-                      <input className="inputs"
-                          type="text"
-                          name="name"
-                          placeholder="Nombre de la raza"/>
-                          </div>
+                    
+                  <div className={classes.form}>
+                  <input className={classes.inputs}
+                      type="text"
+                      name="verificacion"
+                      value={input.name[0]}
+                      disabled
+                      
+                      />  
+                     
+              </div>
                           )
                     }
       </Grid>

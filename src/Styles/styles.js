@@ -155,7 +155,10 @@ export default makeStyles(() => ({
     overflow: "auto",
     border: "2px solid rgb(0, 0, 0)",
     backdropFilter: "blur(0.2ex)",
-    margin: "1.5ex"
+    margin: "1.5ex",
+    top: "150px",
+    right: "40.39%",
+    position: "absolute"
   },
   inputs: {
     textAlign: "center",

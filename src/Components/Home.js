@@ -8,6 +8,7 @@ import axios from "axios";
 
 
 export default function Home() {
+  let email1='';
   const [input, setInput] = useState({
         name: [],
         email: []
@@ -35,15 +36,25 @@ export default function Home() {
   function handleSelect(e) {
     setInput({
         ...input,
-        name: [...input.name, e.target.value]
+        name: [...input.name, e.target.value],
+        
+    })
+    handleEmail()
+}
+
+function handleEmail() {
+    characters.forEach((e)=>{
+      if(input.name[0] === e.name)
+      email1 = e.email
     })
 }
+
 
 function handleSubmit(e) {
   e.preventDefault()
   alert('La raza fue agregada correctamente!✅');
 setInfo(true)
-console.log(input.email)
+
 }
 
 
@@ -54,17 +65,18 @@ console.log(input.email)
       Cotizador Vehiculos
       <Grid item key={characters} xs={4} sm={6} md={12}>
       <select 
-      onChange={(e) => handleSelect(e)} 
+      onChange={(e) => {handleSelect(e)}} 
       className={classes.list}
       name="name">
         <option value="default">Cliente 👨</option>
         {
-          characters.map((user) => (
-            <option
+          characters?.map((user) => {
+            return(<option
               key={user.id}
-              value={user.name}
-            >{user.name}</option>
-          ))
+              value={
+                user.name}
+            >{user.name}</option>)
+})
         }
       </select>
       <select 
@@ -98,11 +110,12 @@ console.log(input.email)
                         type="submit"
                         
                         disabled={input.name.length <= 2 ? true : false}
-                       onClick={(e) => this.handleSubmit(e)}
+                       onClick={(e) => handleSubmit(e)}
                     >Validar‼️</button>
 
                     {
                       !info ? (
+                        
                       <div className={classes.form}>
                       <input className={classes.inputs}
                           type="text"
@@ -114,7 +127,6 @@ console.log(input.email)
                           disabled
                           placeholder="Email del Cliente"/>
                   </div>) : (
-                    
                   <div className={classes.form}>
                   <input className={classes.inputs}
                       type="text"
@@ -122,8 +134,17 @@ console.log(input.email)
                       value={input.name[0]}
                       disabled
                       
-                      />  
-                     
+                   />  
+                   <input className={classes.inputs}
+                      type="text"
+                      value={
+                        email1
+                      }
+                      disabled
+                      
+                   />
+      {handleEmail()}
+      {console.log(email1)}
               </div>
                           )
                     }

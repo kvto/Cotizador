@@ -10,9 +10,10 @@ import axios from "axios";
 export default function Home() {
   let email1='';
   let phone1='';
+  let user1='';
+  let street1, suite1, city1= '';
   const [input, setInput] = useState({
-        name: [],
-        email: []
+        name: []
     })
   const [characters, setCharacters] = useState([]);
   const [info, setInfo] = useState(false);
@@ -42,18 +43,20 @@ export default function Home() {
     })
 }
 
-function handleEmail() {
+function handleData() {
     characters.forEach((e)=>{
       if(input.name[0] === e.name)
       email1 = e.email
+      phone1 = e.phone
+      user1= e.username
+      street1= e.address.street
+      suite1= e.address.suite
+      city1= e.address.city
     })
 }
 
-function handlePhone() {
-  characters.forEach((e)=>{
-    if(input.name[0] === e.name)
-    phone1 = e.phone
-  })
+function price(){
+
 }
 
 function handleSubmit(e) {
@@ -62,14 +65,11 @@ function handleSubmit(e) {
 setInfo(true)
 
 }
-
-
-
   const classes = useStyles(); 
   return (
     <div>
       Cotizador Vehiculos
-      <Grid item key={characters} xs={4} sm={6} md={12}>
+      <Grid item key={characters} xs={4} sm={12} >
       <select 
       onChange={(e) => {handleSelect(e)}} 
       className={classes.list}
@@ -107,10 +107,12 @@ setInfo(true)
       className={classes.list}
       name="plan">
         <option value="default">Tipo de plan </option>
-        <option value="compl">Protección completa 📈</option>
-        <option value="limi">Protección limitada 📉</option>
-        <option value="robo">Solo robo 📉</option>
+        <option value="10000">Protección completa 📈</option>
+        <option value="5000">Protección limitada 📉</option>
+        <option value="7000">Solo robo 📉</option>
       </select>
+      </Grid>
+      {console.log(input)}
       <button
                         className={classes.buttomHome}
                         type="submit"
@@ -137,6 +139,32 @@ setInfo(true)
                           type="text"
                           disabled
                           placeholder="Telefono del Cliente"/>
+
+                      <input className={classes.inputs}
+                          type="text"
+                          disabled
+                          placeholder="Usuario del Cliente"/>
+      
+      <Grid item key={characters} xs={4} sm={10} md={12}>
+                  <input className={classes.inputs1}
+                      type="text"
+                      name="verificacion"
+                      value="Calle"
+                      disabled
+                   /> 
+                   <input className={classes.inputs1}
+                      type="text"
+                      name="verificacion"
+                      value='Suite'
+                      disabled
+                   /> 
+                   <input className={classes.inputs1}
+                      type="text"
+                      name="verificacion"
+                      value='Ciudad'
+                      disabled
+                   />
+      </Grid>
                   </div>) : (
                   <div className={classes.form}>
                   <input className={classes.inputs}
@@ -146,26 +174,53 @@ setInfo(true)
                       disabled
                       
                    />  
-                   {handleEmail()}
-                   <input className={classes.inputs}
+                   
+                   {handleData()}
+                    <input className={classes.inputs}
                       type="text"
                       name="verificacion"
                       value={email1}
+                      size="1000"
                       disabled
                       
                    /> 
-                    {handlePhone()}
                    <input className={classes.inputs}
                       type="text"
                       name="verificacion"
                       value={phone1}
                       disabled
-                      
                    /> 
+                    <input className={classes.inputs}
+                      type="text"
+                      name="verificacion"
+                      value={user1}
+                      disabled
+                   /> 
+
+<Grid item key={characters} xs={4} sm={6} md={12}>
+                  <input className={classes.inputs1}
+                      type="text"
+                      name="verificacion"
+                      value={street1}
+                      disabled
+                   /> 
+                   <input className={classes.inputs1}
+                      type="text"
+                      name="verificacion"
+                      value={suite1}
+                      disabled
+                   /> 
+                   <input className={classes.inputs1}
+                      type="text"
+                      name="verificacion"
+                      value={city1}
+                      disabled
+                   />   
+</Grid>
               </div>
                           )
                     }
-      </Grid>
+      
     </div>
   )
 }

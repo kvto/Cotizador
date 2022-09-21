@@ -139,15 +139,15 @@ export default makeStyles(() => ({
     width: "23ex",
     height: "4ex",
     textAlign: "center",
-    top: "10ex",
+    top: "4ex",
     position: "relative",
     fontFamily: "serif",
     fontSize: "1.9ex",
     fontWeight: "bold",
     color: "#ffa500",
+
   },
   form: {
-    display: "grid",
     gridTemplateColumns: "1fr",
     gridTemplateRows: "repeat(3, 1fr)",
     gridColumngap: "5px",
@@ -157,10 +157,19 @@ export default makeStyles(() => ({
     backdropFilter: "blur(0.2ex)",
     margin: "1.5ex",
     top: "150px",
-    right: "40.39%",
+    left: "8.39%",
     position: "absolute"
   },
   inputs: {
+    textAlign: "center",
+    borderRadius: "5ex",
+    border: "none",
+    margin: "2ex",
+    fontSize: "18px",
+    height: "30px",
+    width: "200px",
+  },
+  inputs1: {
     textAlign: "center",
     borderRadius: "5ex",
     border: "none",

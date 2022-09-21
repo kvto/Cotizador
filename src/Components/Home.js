@@ -9,6 +9,7 @@ import axios from "axios";
 
 export default function Home() {
   let email1='';
+  let phone1='';
   const [input, setInput] = useState({
         name: [],
         email: []
@@ -39,7 +40,6 @@ export default function Home() {
         name: [...input.name, e.target.value],
         
     })
-    handleEmail()
 }
 
 function handleEmail() {
@@ -49,6 +49,12 @@ function handleEmail() {
     })
 }
 
+function handlePhone() {
+  characters.forEach((e)=>{
+    if(input.name[0] === e.name)
+    phone1 = e.phone
+  })
+}
 
 function handleSubmit(e) {
   e.preventDefault()
@@ -126,6 +132,11 @@ setInfo(true)
                           type="text"
                           disabled
                           placeholder="Email del Cliente"/>
+
+                      <input className={classes.inputs}
+                          type="text"
+                          disabled
+                          placeholder="Telefono del Cliente"/>
                   </div>) : (
                   <div className={classes.form}>
                   <input className={classes.inputs}
@@ -135,16 +146,22 @@ setInfo(true)
                       disabled
                       
                    />  
+                   {handleEmail()}
                    <input className={classes.inputs}
                       type="text"
-                      value={
-                        email1
-                      }
+                      name="verificacion"
+                      value={email1}
                       disabled
                       
-                   />
-      {handleEmail()}
-      {console.log(email1)}
+                   /> 
+                    {handlePhone()}
+                   <input className={classes.inputs}
+                      type="text"
+                      name="verificacion"
+                      value={phone1}
+                      disabled
+                      
+                   /> 
               </div>
                           )
                     }

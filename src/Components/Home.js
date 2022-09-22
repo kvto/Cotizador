@@ -56,7 +56,12 @@ function handleData() {
 }
 
 function price(){
-
+  let priceA = parseInt(input.name[1])
+  switch(input.name[2]){
+    case 1:{
+      
+    }
+  }
 }
 
 function handleSubmit(e) {
